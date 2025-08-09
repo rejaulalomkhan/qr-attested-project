@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Attestation Result</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="vertical-text">Powered by VFS Global</div>
+        
+        <div class="document-container">
+            <div class="logos-header">
+                <div class="logo-left">
+                    <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/logo/oman_logo.png" alt="Oman Post Logo" class="logo-img">
+                </div>
+                <div class="logo-right">
+                    <div class="ministry-info">
+                        <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/images/khanjar.jpg" alt="Sultanate of Oman Emblem" class="logo-img">
+                        <span class="ministry-text">Foreign Ministry</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="titles">
+                <div class="arabic-title">بيانات التصديق الرقمي</div>
+                <div class="english-title">Digital Attestation Result</div>
+            </div>
+
+            <div class="section">
+                <table class="tableheading">
+                    <tr>
+                        <td class="Heading tbtrtd">Transaction Details</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Transaction Number</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">VN196049</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Payment ID</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">202507813259195</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Total Payment</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">OMR 45.75</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Transaction Date</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">19 Mar 2025</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <table class="tableheading">
+                    <tr>
+                        <td class="Heading tbtrtd">Candidate Details</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Document Type</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">Other commercial Documents</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Applicant Name</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">Jahed</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Email Id</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">Agent70rx@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Phone Number</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">77224291</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <table class="tableheading">
+                    <tr>
+                        <td class="Heading tbtrtd">Verification Details</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Verifier Name</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">Foreign Ministry - Oman</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Verification Status</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">Approved</td>
+                    </tr>
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Verification Date & Time</td>
+                        <td class="labelsvalue tbtrtd tdwidthright">2025-03-19 10:23:22</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <table class="tableheading">
+                    <tr>
+                        <td class="Heading tbtrtd">Document Details</td>
+                    </tr>
+                </table>
+                <table class="table" style="border-collapse: collapse;">
+                    <tr>
+                        <td class="tbtrtd tdwidthleft">Original Document</td>
+                                                 <td class="labelsvalue tbtrtd tdwidthright">
+                             <a href="#" class="view-document" onclick="openDocumentModal('original')">View Document</a>
+                         </td>
+                     </tr>
+                     <tr style="border-top: 2px solid black;">
+                         <td class="tbtrtd tdwidthleft">Attested Document</td>
+                         <td class="labelsvalue tbtrtd tdwidthright">
+                             <a href="#" class="view-document" onclick="openDocumentModal('attested')">View Document</a>
+                         </td>
+                     </tr>
+                </table>
+            </div>
+
+            <div class="section" style="text-align: center; margin-top: 40px;">
+                <a href="form.html" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
+                    📝 Create New Attestation
+                </a>
+                         </div>
+         </div>
+     </div>
+
+     <!-- Document Modal -->
+     <div id="documentModal" class="modal">
+         <div class="modal-content">
+             <!-- Modal Header -->
+             <div class="modal-header">
+                 <h3 id="modalTitle">Document Viewer</h3>
+                 <button class="close-btn" onclick="closeDocumentModal()">×</button>
+             </div>
+             
+             <!-- Modal Body -->
+             <div class="modal-body">
+                 <!-- Loader -->
+                 <div id="documentLoader" class="loader-container">
+                     <div class="loader"></div>
+                     <p>Loading document...</p>
+                 </div>
+                 
+                 <!-- Document Content -->
+                 <div id="documentContent" class="document-content" style="display: none;">
+                     <iframe id="documentFrame" src="about:blank" frameborder="0"></iframe>
+                 </div>
+                 
+                 <!-- Attestation Info (only for attested documents) -->
+                 <div id="attestationInfo" class="attestation-info" style="display: none;">
+                     <div class="info-content">
+                         <!-- Left Column: English Titles -->
+                         <div class="info-left">
+                             <div class="info-item">
+                                 <label>e-Verify No:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Verify By:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Verify at:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Applicant Name:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Document Name:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Date of Attestation:</label>
+                             </div>
+                             <div class="info-item">
+                                 <label>Approver Name:</label>
+                             </div>
+                         </div>
+                         
+                         <!-- Middle Column: Dynamic Data -->
+                         <div class="info-center">
+                             <div class="info-item">
+                                 <span>VN00297215</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>Sumaiyaa Al Balushi</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>Khasab</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>fazlul karim</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>Marriage certificate</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>2025-07-31 10:13:44</span>
+                             </div>
+                             <div class="info-item">
+                                 <span>Sumaiyaa Al Balushi</span>
+                             </div>
+                         </div>
+                         
+                         <!-- Right Column: Arabic Headings -->
+                         <div class="info-right">
+                             <div class="info-item-arabic">
+                                 <label>رقم التصديق:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>تم التحقق من قبل:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>تم التحقق في:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>اسم العميل:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>اسم الوثيقة:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>تاريخ التصديق:</label>
+                             </div>
+                             <div class="info-item-arabic">
+                                 <label>تمت المصادقة من قبل:</label>
+                             </div>
+                         </div>
+                     </div>
+                     
+                     <!-- Bottom Verification Bar -->
+                     <div class="verification-bar">
+                         <div class="verification-left">
+                             <div class="blockchain-verified">
+                                 <span class="shield-icon">🛡️</span>
+                                 <span>Blockchain Verified</span>
+                             </div>
+                         </div>
+                         
+                         <div class="verification-center">
+                             <div class="verification-text">
+                                 <span class="attestation-number">بالرقم تصديق : VN00297215</span>
+                                 <div class="verification-description">
+                                     تم إنجاز المعاملة إلكترونيا و للتأكد من صحة المعاملة يمكنك مسح الباركود (QR Code)
+                                 </div>
+                             </div>
+                         </div>
+                         
+                         <div class="verification-right">
+                             <div id="qrCode" class="qr-code"></div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <script>
+         // Document URLs using local assets
+         const documents = {
+             original: 'assets/VN00297215.pdf',
+             attested: 'assets/VN00297215.pdf'
+         };
+
+         let currentDocument = 'original';
+
+         // Open document modal
+         function openDocumentModal(docType) {
+             currentDocument = docType;
+             
+             const modal = document.getElementById('documentModal');
+             const loader = document.getElementById('documentLoader');
+             const content = document.getElementById('documentContent');
+             const attestationInfo = document.getElementById('attestationInfo');
+             const modalTitle = document.getElementById('modalTitle');
+             
+             // Show modal
+             modal.style.display = 'flex';
+             
+             // Update modal title
+             const title = docType === 'original' ? 'Original Document' : 'Attested Document';
+             modalTitle.textContent = title;
+             
+             // Show loader
+             loader.style.display = 'flex';
+             content.style.display = 'none';
+             attestationInfo.style.display = 'none';
+             
+             // Load document after a short delay to show loader
+             setTimeout(() => {
+                 const iframe = document.getElementById('documentFrame');
+                 iframe.src = documents[docType];
+                 
+                 // Hide loader and show content when iframe loads
+                 iframe.onload = function() {
+                     loader.style.display = 'none';
+                     content.style.display = 'block';
+                     
+                     // Show attestation info only for attested documents
+                     if (docType === 'attested') {
+                         attestationInfo.style.display = 'block';
+                         generateQRCode();
+                     }
+                 };
+             }, 1000);
+         }
+
+         // Close document modal
+         function closeDocumentModal() {
+             const modal = document.getElementById('documentModal');
+             const iframe = document.getElementById('documentFrame');
+             
+             // Clear iframe source
+             iframe.src = 'about:blank';
+             
+             // Hide modal
+             modal.style.display = 'none';
+         }
+
+         // Generate QR Code
+         function generateQRCode() {
+             const qrContainer = document.getElementById('qrCode');
+             const documentUrl = documents[currentDocument];
+             
+             // Clear previous QR code
+             qrContainer.innerHTML = '';
+             
+             // Generate new QR code
+             QRCode.toCanvas(qrContainer, documentUrl, {
+                 width: 120,
+                 height: 120,
+                 margin: 2,
+                 color: {
+                     dark: '#000000',
+                     light: '#FFFFFF'
+                 }
+             }, function (error) {
+                 if (error) {
+                     console.error('QR Code generation failed:', error);
+                     qrContainer.innerHTML = '<div class="qr-error">QR Code Error</div>';
+                 }
+             });
+         }
+
+         // Close modal when clicking outside
+         window.onclick = function(event) {
+             const modal = document.getElementById('documentModal');
+             if (event.target === modal) {
+                 closeDocumentModal();
+             }
+         }
+
+         // Close modal with Escape key
+         document.addEventListener('keydown', function(event) {
+             if (event.key === 'Escape') {
+                 closeDocumentModal();
+             }
+         });
+     </script>
+ </body>
+</html>

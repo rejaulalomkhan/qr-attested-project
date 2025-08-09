@@ -1,0 +1,192 @@
+/* Table border styles for result page */
+table, th, td {
+    border: 2px solid #222;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px 12px;
+}
+/* Copied from designs/style2.css for attestation form styling */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 48px 48px 32px 48px;
+    position: relative;
+}
+
+.vertical-text {
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 16px;
+    color: #b0b0b0;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.document-container {
+    width: 100%;
+}
+
+.logos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.logo-img {
+    height: 48px;
+}
+
+.titles {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.arabic-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.english-title {
+    font-size: 18px;
+    color: #4a5568;
+    margin-bottom: 12px;
+}
+
+.section {
+    margin-bottom: 24px;
+}
+
+.section-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 12px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 15px;
+    background: #f7fafc;
+    transition: border 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-reset {
+    background: #e2e8f0;
+    color: #4a5568;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+
+.btn-reset:hover {
+    background: #cbd5e0;
+}
+
+.btn-add-upload {
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.btn-add-upload:hover {
+    background: #764ba2;
+}
+
+.btn-remove-upload {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.2s;
+}
+
+.btn-remove-upload:hover {
+    background-color: #c0392b;
+}
+
+.form-actions {
+    margin-top: 24px;
+    text-align: right;
+}
+
+small {
+    color: #718096;
+    font-size: 12px;
+}
