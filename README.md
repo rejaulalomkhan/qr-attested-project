@@ -1,7 +1,7 @@
 # Laravel Attestation System with QR Code Verification
 ## Demo link
-```https://omanpost.docswallet.com/User/#/page/preview/PR4%2F7p9nnifV2OJuNWHuiQ%3D%3D
-```
+`https://omanpost.docswallet.com/User/#/page/preview/PR4%2F7p9nnifV2OJuNWHuiQ%3D%3D`
+
 ## 1. Project Setup
 1. Create a new Laravel project:
    ```bash
