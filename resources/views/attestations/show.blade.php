@@ -10,13 +10,17 @@
         .doc-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
         .doc-modal.doc-modal--open { display: block; }
         .doc-modal__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.6); }
-        .doc-modal__content { position: absolute; inset: 0; display: flex; flex-direction: column; }
-        .doc-modal__close { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; border: none; font-size: 28px; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; z-index: 2; }
-        .doc-modal__body { position: relative; flex: 1; overflow: auto; background: #fff; }
+        .doc-modal__content { position: absolute; inset: 0; display: flex; flex-direction: column; background: #eef0f2; }
+        .doc-modal__close { position: fixed; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; border: none; font-size: 14px; padding: 8px 12px; border-radius: 16px; cursor: pointer; z-index: 3; }
+        .doc-modal__body { position: relative; flex: 1; overflow: hidden; background: transparent; display: flex; justify-content: center; align-items: center; padding: 0; }
         .doc-modal__content-inner { min-height: 100%; display: none; }
         .doc-modal__loader { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 600 16px/1 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; color: #333; background: #fff; }
         .doc-modal__error { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: #fff; color: #b00020; padding: 24px; text-align: center; }
         .doc-modal__error a { color: #2962ff; text-decoration: underline; }
+        .doc-modal__page { width: 1347px; max-width: 100vw; height: 100vh; overflow: auto; background: #ffffff; border-radius: 0; box-shadow: none; padding: 0; }
+        @media (max-width: 820px) {
+            .doc-modal__page { height: 100vh; border-radius: 0; max-width: 100vw; }
+        }
     </style>
 </head>
 <body>
@@ -103,7 +107,7 @@
             <div class="doc-modal__body">
                 <div class="doc-modal__loader" id="docLoader">Loading…</div>
                 <div class="doc-modal__error" id="docError"></div>
-                <div id="docContent" class="doc-modal__content-inner"></div>
+                <div class="doc-modal__page"><div id="docContent" class="doc-modal__content-inner"></div></div>
             </div>
         </div>
     </div>

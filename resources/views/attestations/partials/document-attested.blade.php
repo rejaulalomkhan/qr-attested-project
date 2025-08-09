@@ -1,18 +1,27 @@
 @php
     $attachments = $attachments ?? [];
-    $footerLabel = 'Blockchain Verified';
+    $footerLabel = ' ';
+    $footerInnerBgUrl = null;
+    if (\Illuminate\Support\Facades\Storage::disk('public')->exists('footer-bg-image.png')) {
+        $footerInnerBgUrl = asset('storage/footer-bg-image.png');
+    }
+    $hasMultiple = is_array($attachments) && count($attachments) > 1;
 @endphp
 
 <style>
-    .attested-preview-page { background:#fff; margin: 0 0 28px 0; border: 1px solid #eee; }
+    .attested-preview-page { background:#fff; margin: 0 0 0px 0; border: 1px solid #eee; }
     .attested-preview-top { width:100%; display:block; }
     .attested-preview-top img { display:block; width:100%; height:auto; object-fit:contain; max-height:70vh; }
     .attested-preview-top embed { display:block; width:100%; height:70vh; border:0; }
-    .attested-preview-footer { position: relative; width:100%; min-height: 180px; background: var(--footer-fallback, linear-gradient(180deg, #fff 0%, #f7f7f7 100%)); background-size: cover; background-repeat:no-repeat; background-position:center; padding: 16px; box-sizing: border-box; }
-    .attested-preview-footer-inner { display:flex; flex-direction: row; align-items:flex-end; gap: 24px; }
-    .attested-preview-footer-left { flex: 1 1 auto; display:flex; align-items:flex-end; gap:12px; color:#6c757d; font-weight:600; }
-    .attested-preview-qr { width: 90px; height: 90px; }
-    .attested-preview-footer-right { flex: 0 0 auto; display:flex; justify-content:flex-end; }
+    .attested-preview-footer { position: relative; width:100%; height: 400px; 0px 40px 10px 0px; margin-bottom: 10px; box-sizing: border-box; }
+    .attested-preview-footer-bg { position: absolute; left: 0; right: 0; top: 0; height: 400px; background-repeat: no-repeat; background-position: bottom center; background-size: 100% 405px; pointer-events: none; }
+    .attested-preview-footer-inner { position: relative; height: 100%; display:flex; flex-direction: row; align-items:flex-end; justify-content: space-between; gap: 24px; }
+    .attested-preview-footer-left { flex: 0 1 auto; display:flex; align-items:center; gap:12px; color:#6c757d; font-weight:600; }
+    .attested-preview-qr { width: 90px; height: 90px; }         
+    .attested-preview-footer-right { flex: 1 1 auto; display:flex; flex-direction: column; align-items:flex-end; gap: 52px; margin-right: 10px;}
+    .attested-preview-qrrow { display:flex; align-items:flex-end; justify-content:flex-end; gap: 16px; }
+    .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; }
+    .attested-preview-qrtext small { font-weight: 600; }
     @media (max-width: 768px) {
         .attested-preview-footer-inner { flex-direction: column-reverse; align-items: stretch; }
         .attested-preview-footer-right { justify-content: stretch; }
@@ -31,14 +40,18 @@
                     <img src="{{ asset('storage/' . $file) }}" alt="Document {{ $idx + 1 }}" />
                 @endif
             </div>
-            <div class="attested-preview-footer" style="--footer-fallback: linear-gradient(180deg,#ffffff 0%,#f5f5f5 100%); @isset($footerBgUrl) background-image:url('{{ $footerBgUrl }}'); @endisset">
+            <div class="attested-preview-footer">
+                @if($footerInnerBgUrl)
+                    <div class="attested-preview-footer-bg" style="background-image:url('{{ $footerInnerBgUrl }}');"></div>
+                @endif
                 <div class="attested-preview-footer-inner">
                     <div class="attested-preview-footer-left">
                         {{-- <img class="attested-preview-qr" src="data:image/png;base64,{{ $qrData }}" alt="QR Code" /> --}}
-                        <img class="attested-preview-qr" src="{{ asset('storage/qrdemo.png') }}" alt="QR Code" />
+                        
                         <span>{{ $footerLabel }}</span>
                     </div>
                     <div class="attested-preview-footer-right">
+                        <div>
                         @include('attestations.partials.info-box', [
                             'info' => [
                                 'verify_no' => $attestation->transaction_number,
@@ -50,10 +63,21 @@
                                 'approver' => $attestation->approver_name ?? '-',
                             ]
                         ])
+                        </div>
+                        <div class="attested-preview-qrrow">
+                            <div class="attested-preview-qrtext">
+                                <div>بالرقم تصدیق : <strong>{{ $attestation->transaction_number }}</strong></div>
+                                <small>تم إنجاز المعاملة إلكترونیا و للتأكد من صحة المعاملة یمكنك مسح الباركود</small>
+                            </div>
+                            <img class="attested-preview-qr" src="{{ asset('storage/qrdemo.png') }}" alt="QR Code" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        @if($hasMultiple && $idx < count($attachments) - 1)
+            <div style="height: 24px; background: #f7f7f7;"></div>
+        @endif
     @empty
         <div style="padding: 24px; color: #b00020;">No documents to display.</div>
     @endforelse

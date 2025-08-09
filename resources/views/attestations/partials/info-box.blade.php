@@ -1,4 +1,9 @@
-<table style="width:420px;min-height:120px;border:1px solid #b49650;background:#fff;padding:8px 0 8px 0;font-family:'DejaVu Sans', Arial, 'Noto Sans', 'Segoe UI', sans-serif;font-size:13px;line-height:1.7;box-sizing:border-box;">
+<table style="width: 488px;
+    padding: 4px 13px 5px 3px;
+    font-family: 'DejaVu Sans', Arial, 'Noto Sans', 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    MARGIN: 5PX 28PX 0PX 2PX;">
     <tr>
         <td style="width:32%;text-align:left;font-weight:bold;vertical-align:top;">
             e-Verify No<br>
@@ -9,7 +14,7 @@
             Date of Attestation<br>
             Approver Name
         </td>
-        <td style="width:36%;text-align:center;vertical-align:top;word-break:break-all;">
+        <td style="width:36%;text-align:left;vertical-align:top;word-break:break-all;">
             {{ $info['verify_no'] ?? '-' }}<br>
             {{ $info['verifier'] ?? '-' }}<br>
             {{ $info['verify_at'] ?? '-' }}<br>
