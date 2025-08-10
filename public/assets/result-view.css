@@ -438,14 +438,23 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
     }
 
     .logos-header {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 10px 0 10px;
+        margin-bottom: 16px;
     }
 
-    .logo-img {
-        height: 60px;
+    .logo-left .logo-img,
+    .logo-right .logo-img {
+        height: 46px;
+        width: auto;
+        max-width: 180px;
+        object-fit: contain;
     }
+
+    .ministry-info { align-items: center; }
 
     .arabic-title, .english-title {
         font-size: 24px;
@@ -509,8 +518,10 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
         padding: 15px;
     }
 
-    .logo-img {
-        height: 50px;
+    .logo-left .logo-img,
+    .logo-right .logo-img {
+        height: 42px;
+        max-width: 150px;
     }
 
     .ministry-text {
