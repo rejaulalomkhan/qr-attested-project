@@ -53,24 +53,29 @@ body {
 .logo-left {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    
 }
 
 .logo-right {
     display: flex;
     align-items: center;
     gap: 15px;
-    text-align: center;
+    margin-left: auto; /* push to the far right */
+    justify-content: flex-end;
+    text-align: right;
 }
 
 .logo-img {
-    width: 50%;
+    width: 60%;
     object-fit: contain;
 }
+
 
 .ministry-info {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .ministry-text {
@@ -445,7 +450,7 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
         justify-content: space-between;
         align-items: flex-start;
         gap: 8px;
-        padding: 10px 10px 0 10px;
+        padding: 0px 0px 0 0px;
         margin-bottom: 16px;
     }
 
@@ -512,10 +517,14 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
 }
 
 @media (max-width: 480px) {
+    body {
+        background-color: #ffffff;
+    }
     .vertical-text {
         left: 14px;
-        top: 50%;
-        font-size: 14px;
+        top: 55%;
+        font-weight: 500 !important;
+        font: 20px Calibri;
         z-index: 2;
         display: block;
     }
@@ -523,20 +532,35 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
     .document-container {
         padding: 10px;
         margin-left: 10px;
+        margin-top: 6vh;
     }
 
-    .logo-left .logo-img,
+    /* Exact logo sizes for mobile */
+    .logo-left .logo-img {
+        width: 109.09px;
+        height: 48.14px;
+        max-width: none;
+    }
     .logo-right .logo-img {
-        height: 42px;
-        max-width: 150px;
+        width: 77.86px;
+        height: 63.42px;
+        align-items: right !important;
+        max-width: none;
     }
 
     .ministry-text {
         font-size: 14px;
     }
 
+    /* Center the title blocks, but keep text left-aligned */
+    .titles { display: flex; flex-direction: column; align-items: center; }
     .arabic-title, .english-title {
-        font-size: 20px;
+        font-size: 2rem !important;
+        font-weight: 700;
+        text-align: left !important;
+        width: 80%;
+        margin: 0 auto 0;
+        display: block;
     }
 
     .tableheading, .table {

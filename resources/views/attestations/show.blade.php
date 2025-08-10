@@ -34,7 +34,7 @@
         <div class="document-container">
             <div class="logos-header">
                 <div class="logo-left">
-                    <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/logo/oman_logo.png" alt="Oman Post Logo" class="logo-img">
+                    <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/logo/oman_logo.png" alt="Oman Post Logo" class="logo-img" style="width: 50%; height: 100%;">
                 </div>
                 <div class="logo-right">
                     <div class="ministry-info">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="titles">
+            <div class="titles" style="text-align: center !important;">
                 <div class="arabic-title">بيانات التصديق الرقمي</div>
                 <div class="english-title">Digital Attestation Result</div>
             </div>
