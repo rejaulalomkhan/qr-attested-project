@@ -10,7 +10,6 @@
             <div class="logo-right">
                 <div class="ministry-info" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/images/khanjar.jpg" alt="Sultanate of Oman Emblem" class="logo-img" style="height: 48px;">
-                    <span class="ministry-text" style="color: #d32f2f; font-size: 16px; font-weight: bold; margin-top: 5px;">Foreign Ministry</span>
                 </div>
             </div>
         </div>
@@ -37,26 +36,34 @@
                 </div>
                 <div class="form-group">
                     <label for="total_payment">Total Payment (OMR):</label>
-                    <input type="number" id="total_payment" name="total_payment" step="0.01" value="{{ old('total_payment', $attestation->total_payment ?? '') }}" required>
+                    <input type="number" id="total_payment" name="total_payment" step="0.01" min="0" inputmode="decimal" value="{{ old('total_payment', $attestation->total_payment ?? '') }}" placeholder="e.g. 10.00" required>
                 </div>
                 <div class="form-group">
-                    <label for="transaction_date">Transaction Date:</label>
-                    <input type="date" id="transaction_date" name="transaction_date" value="{{ old('transaction_date', $attestation->transaction_date ?? '') }}" required>
+                    <label for="transaction_date_display">Transaction Date:</label>
+                    @php
+                        $transactionDateRaw = old('transaction_date', $attestation->transaction_date ?? '');
+                        try {
+                            $transactionDateDisplay = $transactionDateRaw ? \Carbon\Carbon::parse($transactionDateRaw)->format('d M Y') : '';
+                        } catch (\Exception $e) {
+                            $transactionDateDisplay = $transactionDateRaw;
+                        }
+                    @endphp
+                    <input type="text" id="transaction_date_display" value="{{ $transactionDateDisplay }}" placeholder="19 Mar 2025" required autocomplete="off">
+                    <input type="hidden" id="transaction_date" name="transaction_date" value="{{ $transactionDateRaw }}">
+                    <small>Format: e.g. 19 Mar 2025</small>
                 </div>
             </div>
             <div class="section" style="background: #f8fafc; border-radius: 10px; padding: 24px 24px 16px 24px; margin-bottom: 32px;">
                 <div class="section-header" style="font-size: 20px; font-weight: bold; color: #2d3748; margin-bottom: 18px;">Candidate Details</div>
                 <div class="form-group">
                     <label for="document_type">Document Type:</label>
-                    <select id="document_type" name="document_type" required>
-                        <option value="">Select document type</option>
-                        @php $docType = old('document_type', $attestation->document_type ?? '') @endphp
-                        <option value="Other commercial Documents" {{ $docType == 'Other commercial Documents' ? 'selected' : '' }}>Other commercial Documents</option>
-                        <option value="Educational Documents" {{ $docType == 'Educational Documents' ? 'selected' : '' }}>Educational Documents</option>
-                        <option value="Personal Documents" {{ $docType == 'Personal Documents' ? 'selected' : '' }}>Personal Documents</option>
-                        <option value="Business Documents" {{ $docType == 'Business Documents' ? 'selected' : '' }}>Business Documents</option>
-                        <option value="Legal Documents" {{ $docType == 'Legal Documents' ? 'selected' : '' }}>Legal Documents</option>
-                    </select>
+                    <input type="text" id="document_type"
+                    list="document-type-list"                    
+                     name="document_type" value="{{ old('document_type', $attestation->document_type ?? '') }}" required>
+                    <datalist id="document-type-list">
+                        <option value="Other commercial Documents">
+                        <option value="Civil Document- ID Card Driving license birth certificate passport">
+                    </datalist>
                 </div>
                 <div class="form-group">
                     <label for="applicant_name">Applicant Name:</label>
@@ -131,8 +138,62 @@
                 <button type="reset" class="btn-reset" style="background: #e2e8f0; color: #4a5568; border: none; border-radius: 6px; padding: 10px 24px; font-size: 16px; font-weight: 600; cursor: pointer; margin-right: 10px;">Reset Form</button>
             </div>
         </form>
+        @if ($errors->any())
+            <div style="margin: 16px 40px 0 40px; color: #b00020; background: #fdecea; border: 1px solid #f5c2c7; padding: 12px 16px; border-radius: 8px;">
+                <ul style="margin:0; padding-left: 18px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
 <script>
-// ...JS logic for file repeater and date/time auto-fill (as in your HTML)...
+// Date display <-> ISO hidden sync
+(function() {
+  var display = document.getElementById('transaction_date_display');
+  var hidden = document.getElementById('transaction_date');
+  if (!display || !hidden) return;
+
+  function toDisplay(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return iso; // fallback
+    var day = ('0' + d.getDate()).slice(-2);
+    var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var mon = monthNames[d.getMonth()];
+    var year = d.getFullYear();
+    return day + ' ' + mon + ' ' + year;
+  }
+
+  function toISO(displayVal) {
+    if (!displayVal) return '';
+    // Accept formats like: 19 Mar 2025, 19-Mar-2025, 19/Mar/2025
+    var parts = displayVal.trim().replace(/[-\/]+/g, ' ').split(/\s+/);
+    if (parts.length !== 3) return '';
+    var day = parseInt(parts[0], 10);
+    var monStr = parts[1].slice(0,3).toLowerCase();
+    var year = parseInt(parts[2], 10);
+    var map = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+    if (!(monStr in map) || isNaN(day) || isNaN(year)) return '';
+    var d = new Date(Date.UTC(year, map[monStr], day));
+    if (isNaN(d.getTime())) return '';
+    // Return YYYY-MM-DD to align with backend expectations
+    var mm = ('0' + (d.getUTCMonth()+1)).slice(-2);
+    var dd = ('0' + d.getUTCDate()).slice(-2);
+    return year + '-' + mm + '-' + dd;
+  }
+
+  // On manual edit, update hidden
+  display.addEventListener('change', function() {
+    var iso = toISO(display.value);
+    hidden.value = iso;
+  });
+
+  // Normalize initial display if needed
+  if (!display.value && hidden.value) {
+    display.value = toDisplay(hidden.value);
+  }
+})();
 </script>

@@ -6,18 +6,17 @@
         </div>
     @endif
     <div class="vertical-text">Powered by VFS Global</div>
-    <div class="document-container">
-        <div class="logos-header">
-            <div class="logo-left">
-                <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/logo/oman_logo.png" alt="Oman Post Logo" class="logo-img">
-            </div>
-            <div class="logo-right">
-                <div class="ministry-info">
-                    <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/images/khanjar.jpg" alt="Sultanate of Oman Emblem" class="logo-img">
-                    <span class="ministry-text">Foreign Ministry</span>
-                </div>
+    <div class="logos-header">
+        <div class="logo-left">
+            <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/logo/oman_logo.png" alt="Oman Post Logo" class="logo-img">
+        </div>
+        <div class="logo-right">
+            <div class="ministry-info">
+                <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/images/khanjar.jpg" alt="Sultanate of Oman Emblem" class="logo-img">
             </div>
         </div>
+    </div>
+    <div class="document-container">        
         <div class="titles">
             <div class="arabic-title">بيانات التصديق الرقمي</div>
             <div class="english-title">Digital Attestation Result</div>

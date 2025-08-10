@@ -39,7 +39,6 @@
                 <div class="logo-right">
                     <div class="ministry-info">
                         <img src="https://omanpostapi.docswallet.com/pdf/document_repository/images/images/khanjar.jpg" alt="Sultanate of Oman Emblem" class="logo-img">
-                        <span class="ministry-text">Foreign Ministry</span>
                     </div>
                 </div>
             </div>
@@ -98,11 +97,13 @@
                     </tr>
                 </table>
             </div>
+            @auth
             <div class="section" style="text-align: center; margin-top: 40px;">
                 <a href="{{ route('attestations.create') }}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);">
                     📝 Create New Attestation
                 </a>
             </div>
+            @endauth
         </div>
     </div>
     <div id="documentModal" class="doc-modal" aria-hidden="true" role="dialog" aria-modal="true">

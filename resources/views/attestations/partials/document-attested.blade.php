@@ -11,14 +11,14 @@
 <style>
     .attested-preview-page { background:#fff; margin: 0 0 0px 0; border: 1px solid #eee; }
     .attested-preview-top { width:100%; display:block; }
-    .attested-preview-top img { display:block; width:100%; height:auto; object-fit:contain; max-height:70vh; }
+    .attested-preview-top img { display: block; width: 100%; height: auto; object-fit: contain; max-height: 135vh; }
     .attested-preview-top embed { display:block; width:100%; height:70vh; border:0; }
     .attested-preview-footer { position: relative; width:100%; height: 400px; 0px 40px 10px 0px; margin-bottom: 10px; box-sizing: border-box; }
     .attested-preview-footer-bg { position: absolute; left: 0; right: 0; top: 0; height: 400px; background-repeat: no-repeat; background-position: bottom center; background-size: 100% 405px; pointer-events: none; }
     .attested-preview-footer-inner { position: relative; height: 100%; display:flex; flex-direction: row; align-items:flex-end; justify-content: space-between; gap: 24px; }
     .attested-preview-footer-left { flex: 0 1 auto; display:flex; align-items:center; gap:12px; color:#6c757d; font-weight:600; }
-    .attested-preview-qr { width: 90px; height: 90px; }         
-    .attested-preview-footer-right { flex: 1 1 auto; display:flex; flex-direction: column; align-items:flex-end; gap: 52px; margin-right: 10px;}
+    .attested-preview-qr { width: 100px; height: 100px; }         
+    .attested-preview-footer-right { flex: 1 1 auto; display:flex; flex-direction: column; align-items:flex-end; gap: 17px; margin-right: 10px;}
     .attested-preview-qrrow { display:flex; align-items:flex-end; justify-content:flex-end; gap: 16px; }
     .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; }
     .attested-preview-qrtext small { font-weight: 600; }
