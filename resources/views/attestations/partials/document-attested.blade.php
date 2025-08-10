@@ -45,9 +45,7 @@
                     <div class="attested-preview-footer-bg" style="background-image:url('{{ $footerInnerBgUrl }}');"></div>
                 @endif
                 <div class="attested-preview-footer-inner">
-                    <div class="attested-preview-footer-left">
-                        {{-- <img class="attested-preview-qr" src="data:image/png;base64,{{ $qrData }}" alt="QR Code" /> --}}
-                        
+                    <div class="attested-preview-footer-left">                        
                         <span>{{ $footerLabel }}</span>
                     </div>
                     <div class="attested-preview-footer-right">
@@ -69,7 +67,7 @@
                                 <div>بالرقم تصدیق : <strong>{{ $attestation->transaction_number }}</strong></div>
                                 <small>تم إنجاز المعاملة إلكترونیا و للتأكد من صحة المعاملة یمكنك مسح الباركود</small>
                             </div>
-                            <img class="attested-preview-qr" src="{{ asset('storage/qrdemo.png') }}" alt="QR Code" />
+                            <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(route('attestations.verify', $attestation->hash))) }}" alt="QR Code" /> 
                         </div>
                     </div>
                 </div>

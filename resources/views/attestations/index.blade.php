@@ -89,6 +89,7 @@
         </div>
     </div>
 </div>
+
 <style>
 .styled-table {
     border-collapse: collapse;

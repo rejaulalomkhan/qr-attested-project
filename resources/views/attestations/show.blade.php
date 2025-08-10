@@ -11,10 +11,15 @@
         .doc-modal.doc-modal--open { display: block; }
         .doc-modal__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.6); }
         .doc-modal__content { position: absolute; inset: 0; display: flex; flex-direction: column; background: #eef0f2; }
+        /* Loading state: keep page visible behind spinner */
+        .doc-modal--loading .doc-modal__backdrop { display: none; }
+        .doc-modal--loading .doc-modal__content { background: transparent; }
         .doc-modal__close { position: fixed; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; border: none; font-size: 14px; padding: 8px 12px; border-radius: 16px; cursor: pointer; z-index: 3; }
         .doc-modal__body { position: relative; flex: 1; overflow: hidden; background: transparent; display: flex; justify-content: center; align-items: center; padding: 0; }
         .doc-modal__content-inner { min-height: 100%; display: none; }
-        .doc-modal__loader { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 600 16px/1 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; color: #333; background: #fff; }
+        .doc-modal__loader { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 600 16px/1 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; color: #333; background: rgba(0, 0, 0, 0.25); }
+        .doc-modal__loader .spinner { width: 56px; height: 56px; border: 4px solid rgba(37, 99, 235, 0.2); border-top-color: #2563eb; border-radius: 50%; animation: doc-spin 0.8s linear infinite; }
+        @keyframes doc-spin { to { transform: rotate(360deg); } }
         .doc-modal__error { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: #fff; color: #b00020; padding: 24px; text-align: center; }
         .doc-modal__error a { color: #2962ff; text-decoration: underline; }
         .doc-modal__page { width: 1347px; max-width: 100vw; height: 100vh; overflow: auto; background: #ffffff; border-radius: 0; box-shadow: none; padding: 0; }
@@ -103,9 +108,11 @@
     <div id="documentModal" class="doc-modal" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="doc-modal__backdrop" data-doc-modal-close></div>
         <div class="doc-modal__content">
-            <button type="button" class="doc-modal__close" title="Close" aria-label="Close" data-doc-modal-close>&times;</button>
+            <button type="button" class="doc-modal__close" style="cursor: pointer; background-color: #49AFCD; color: #fff; padding: 10px; font-size: 16px; border: none; border-radius: 5px;" title="Close" aria-label="Close" data-doc-modal-close>
+                Close/ <span style="font-size: 18px; font-weight: bold;">اغلاق</span>
+            </button>
             <div class="doc-modal__body">
-                <div class="doc-modal__loader" id="docLoader">Loading…</div>
+                <div class="doc-modal__loader" id="docLoader"><div class="spinner" role="status" aria-label="Loading"></div></div>
                 <div class="doc-modal__error" id="docError"></div>
                 <div class="doc-modal__page"><div id="docContent" class="doc-modal__content-inner"></div></div>
             </div>
@@ -130,6 +137,7 @@
                 content.innerHTML = '';
                 // Open modal
                 modal.classList.add('doc-modal--open');
+                modal.classList.add('doc-modal--loading');
                 modal.setAttribute('aria-hidden', 'false');
                 previousHtmlOverflow = document.documentElement.style.overflow;
                 previousBodyOverflow = document.body.style.overflow;
@@ -147,9 +155,11 @@
                       content.innerHTML = data.html;
                       loader.style.display = 'none';
                       content.style.display = 'block';
+                      modal.classList.remove('doc-modal--loading');
                   })
                   .catch(function(err) {
                       loader.style.display = 'none';
+                      modal.classList.remove('doc-modal--loading');
                       errorBox.innerHTML = 'Unable to load content. <br><small>(' + err.message + ')</small>';
                       errorBox.style.display = 'flex';
                   });
