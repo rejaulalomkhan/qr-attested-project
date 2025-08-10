@@ -17,7 +17,7 @@ body {
     background-color: #ffffff !important;
     max-width: 1257px;
     margin: 0 auto;
-    padding: 43px 63px;
+    padding: 8vh 63px;
 }
 }
 
@@ -105,7 +105,7 @@ body {
 }
 
 .section {
-    margin: 0 50px 30px;  
+    margin: 0 40px 30px;  
 }
 
 /* Mobile adjustments */
@@ -130,7 +130,7 @@ body {
 .Heading.tbtrtd {
     border: 1px solid #aeaeae;
     height: 25px;
-    padding: 2px 11px;
+    padding: 2px 1px;
     border: 1px solid #999;
     font-style: italic;
     color: #aeaeae;
@@ -148,9 +148,10 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
     width: 30%;
     font-weight: normal;
     color: #333;
-    padding: 2px 12px;
+    padding: 2px 1px;
     vertical-align: top;
     border: 1px solid #999;
+    font: 16px Calibri;
 }
 
 .labelsvalue.tbtrtd.tdwidthright {
