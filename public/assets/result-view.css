@@ -429,8 +429,11 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
     }
 
     .vertical-text {
-        left: -40px;
+        left: 8px;
+        top: 50%;
         font-size: 16px;
+        z-index: 2;
+        display: block;
     }
 
     .document-container {
@@ -510,12 +513,16 @@ table tbody tr:nth-child(n+2):nth-last-child(n+2) {
 
 @media (max-width: 480px) {
     .vertical-text {
-        left: -30px;
+        left: 14px;
+        top: 50%;
         font-size: 14px;
+        z-index: 2;
+        display: block;
     }
 
     .document-container {
-        padding: 15px;
+        padding: 10px;
+        margin-left: 10px;
     }
 
     .logo-left .logo-img,
