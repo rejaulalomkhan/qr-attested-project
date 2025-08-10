@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('verifier_name');
             $table->string('verification_status');
             $table->dateTime('verification_datetime');
+            $table->string('approver_name')->nullable();
             $table->string('original_document_path');
             $table->timestamps();
         });

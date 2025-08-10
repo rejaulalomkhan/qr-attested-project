@@ -65,7 +65,9 @@
                         <div class="attested-preview-qrrow">
                             <div class="attested-preview-qrtext">
                                 <div>بالرقم تصدیق : <strong>{{ $attestation->transaction_number }}</strong></div>
-                                <small>تم إنجاز المعاملة إلكترونیا و للتأكد من صحة المعاملة یمكنك مسح الباركود</small>
+                                <span role="presentation" dir="rtl" style="font-size: 19.2184px; font-family: serif; transform: scaleX(1.04086);">تم إنجاز المعاملة إلكترونیا و للتأكد من صحة المعاملة یمكنك مسح الباركود
+                                    (QR Code)
+                                </span>
                             </div>
                             <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(route('attestations.verify', $attestation->hash))) }}" alt="QR Code" /> 
                         </div>

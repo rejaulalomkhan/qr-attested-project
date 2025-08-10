@@ -28,6 +28,7 @@ class AttestationController extends Controller
             'verificationDate' => 'required|date',
             'verificationTime' => 'required',
             'original_document.*' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png',
+            'approver_name' => 'nullable|string|max:255',
         ]);
 
         // Combine date and time into a single datetime string with seconds
@@ -62,6 +63,7 @@ class AttestationController extends Controller
             'verifier_name' => $validated['verifier_name'],
             'verification_status' => $validated['verification_status'],
             'verification_datetime' => $verification_datetime,
+            'approver_name' => $validated['approver_name'] ?? null,
             'original_document_path' => $original_document_path,
         ]);
 
@@ -105,6 +107,7 @@ class AttestationController extends Controller
             'verificationDate' => 'required|date',
             'verificationTime' => 'required',
             'original_document.*' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png',
+            'approver_name' => 'nullable|string|max:255',
         ]);
 
         // Combine date and time into a single datetime string with seconds
@@ -132,6 +135,7 @@ class AttestationController extends Controller
             'verifier_name' => $validated['verifier_name'],
             'verification_status' => $validated['verification_status'],
             'verification_datetime' => $verification_datetime,
+            'approver_name' => $validated['approver_name'] ?? null,
             'original_document_path' => $original_document_path,
         ]);
 

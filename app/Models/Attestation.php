@@ -18,6 +18,7 @@ class Attestation extends Model
         'verifier_name',
         'verification_status',
         'verification_datetime',
+        'approver_name',
         'original_document_path',
         'hash',
     ];

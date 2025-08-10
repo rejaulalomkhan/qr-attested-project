@@ -85,6 +85,10 @@
                     <input type="text" id="verifier_name" name="verifier_name" value="{{ old('verifier_name', $attestation->verifier_name ?? 'Foreign Ministry - Oman') }}" readonly>
                 </div>
                 <div class="form-group">
+                    <label for="approver_name">Approver Name:</label>
+                    <input type="text" id="approver_name" name="approver_name" value="{{ old('approver_name', $attestation->approver_name ?? '') }}" placeholder="e.g. Sumaiyaa Al Balushi">
+                </div>
+                <div class="form-group">
                     <label for="verification_status">Verification Status:</label>
                     <select id="verification_status" name="verification_status" required>
                         <option value="">Select status</option>
