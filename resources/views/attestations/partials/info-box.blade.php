@@ -12,15 +12,18 @@
 
 <table style="width: 488px;
     padding: 4px 13px 5px 3px;
-    font-family: 'DejaVu Sans', Arial, 'Noto Sans', 'Segoe UI', sans-serif;
+    font-family: Tahoma, 'Segoe UI', Arial, 'Noto Sans', 'Noto Naskh Arabic', 'DejaVu Sans', sans-serif;
     font-size: 15px;
-    line-height: 1.2;
-    margin: 5px 28px 0 2px;">
+    line-height: 1.12;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 5px 45px 0px 2px;">
     @foreach ($rows as $row)
         <tr>
-            <td style="width:23%;text-align:left;font-weight:bold;vertical-align:top;">{{ $row['label'] }}</td>
-            <td style="width:50%;text-align:left;vertical-align:top;word-break:break-all;">{{ $info[$row['key']] ?? '-' }}</td>
-            <td style="width:27%;text-align:left;font-weight:bold;vertical-align:top;direction:rtl;padding-left:10px;">{{ $row['label_ar'] }}</td>
+            <td style="width:22%;text-align:left;font-weight:600;vertical-align:top;white-space:normal;">{{ $row['label'] }}</td>
+            <td style="width:50%;text-align:left;vertical-align:top;word-break:break-word;white-space:normal;font-weight:700;">{{ $info[$row['key']] ?? '-' }}</td>
+            <td style="width:28%;text-align:left;font-weight:600;vertical-align:top;direction:rtl;padding-left:10px;white-space:normal;">{{ $row['label_ar'] }}</td>
         </tr>
     @endforeach
 </table>

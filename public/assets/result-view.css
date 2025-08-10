@@ -103,6 +103,13 @@ body {
     margin: 0 50px 30px;  
 }
 
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .section {
+    margin: 0px 35px 10px 0px;
+  }
+}
+
 .tableheading {
     width: 30%;
     border-collapse: collapse;
