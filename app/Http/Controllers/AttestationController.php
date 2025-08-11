@@ -223,4 +223,26 @@ class AttestationController extends Controller
             'Content-Disposition' => 'inline; filename="attested_document.pdf"'
         ]);
     }
+
+    public function destroy($id)
+    {
+        $attestation = Attestation::findOrFail($id);
+
+        // Delete stored files associated with the attestation
+        $paths = json_decode($attestation->original_document_path, true);
+        if (!is_array($paths)) {
+            $paths = $attestation->original_document_path ? [$attestation->original_document_path] : [];
+        }
+        foreach ($paths as $relativePath) {
+            if ($relativePath) {
+                Storage::disk('public')->delete($relativePath);
+            }
+        }
+        // Delete generated QR code if exists
+        Storage::disk('public')->delete('qrcodes/' . $attestation->id . '.png');
+
+        $attestation->delete();
+
+        return redirect()->route('attestations.index')->with('success', 'Attestation deleted successfully.');
+    }
 }

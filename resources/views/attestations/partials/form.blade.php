@@ -17,6 +17,16 @@
             <div class="arabic-title" style="font-size: 28px; color: #667eea; margin-bottom: 6px; direction: rtl; font-weight: bold;">نموذج التصديق الرقمي</div>
             <div class="english-title" style="font-size: 28px; color: #667eea; font-weight: bold;">Digital Attestation Form</div>
         </div>
+        @if ($errors->any())
+        <div style="margin: 0 40px 16px 40px; color: #991B1B; background: #FEE2E2; border: 1px solid #FCA5A5; padding: 12px 16px; border-radius: 8px;">
+            <strong style="display:block; margin-bottom:6px;">Please fix the following errors:</strong>
+            <ul style="margin:0; padding-left: 18px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <form class="attestation-form" 
             action="{{ isset($editMode) && $editMode ? route('attestations.update', $attestation->id) : route('attestations.store') }}" 
             method="POST" enctype="multipart/form-data" style="padding: 0 40px;">
@@ -142,15 +152,6 @@
                 <button type="reset" class="btn-reset" style="background: #e2e8f0; color: #4a5568; border: none; border-radius: 6px; padding: 10px 24px; font-size: 16px; font-weight: 600; cursor: pointer; margin-right: 10px;">Reset Form</button>
             </div>
         </form>
-        @if ($errors->any())
-            <div style="margin: 16px 40px 0 40px; color: #b00020; background: #fdecea; border: 1px solid #f5c2c7; padding: 12px 16px; border-radius: 8px;">
-                <ul style="margin:0; padding-left: 18px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 </div>
 <script>

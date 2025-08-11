@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     // API-like HTML responses (no PDFs) for modal consumption
     Route::get('/attestations/{id}/content/original', [AttestationController::class, 'apiOriginalHtml'])->name('attestations.content.original');
     Route::get('/attestations/{id}/content/attested', [AttestationController::class, 'apiAttestedHtml'])->name('attestations.content.attested');
+    Route::delete('/attestations/{id}', [AttestationController::class, 'destroy'])->name('attestations.destroy');
 });
 
 

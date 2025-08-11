@@ -6,8 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Attestation Form</title>
     <link rel="stylesheet" href="{{ asset('assets/attestation-form.css') }}">
+    <style>
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+        .back-link:hover { color: #111827; }
+    </style>
 </head>
 <body>
+    <div style="display:flex; justify-content:center; margin-top: 16px;">
+        <div style="max-width:1100px; width:100%; padding: 0 12px;">
+            <a href="{{ route('attestations.index') }}" class="back-link" aria-label="Back to all attestations">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                <span>Back to list</span>
+            </a>
+        </div>
+    </div>
     @include('attestations.partials.form')
     <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -54,7 +54,11 @@
                     <tr><td class="tbtrtd tdwidthleft">Transaction Number</td><td class="labelsvalue tbtrtd tdwidthright">{{ $attestation->transaction_number }}</td></tr>
                     <tr><td class="tbtrtd tdwidthleft">Payment ID</td><td class="labelsvalue tbtrtd tdwidthright">{{ $attestation->payment_id }}</td></tr>
                     <tr><td class="tbtrtd tdwidthleft">Total Payment</td><td class="labelsvalue tbtrtd tdwidthright">OMR {{ $attestation->total_payment }}</td></tr>
-                    <tr><td class="tbtrtd tdwidthleft">Transaction Date</td><td class="labelsvalue tbtrtd tdwidthright">{{ $attestation->transaction_date }}</td></tr>
+                    @php
+                        try { $txDate = \Carbon\Carbon::parse($attestation->transaction_date)->format('d M Y'); }
+                        catch (\Exception $e) { $txDate = $attestation->transaction_date; }
+                    @endphp
+                    <tr><td class="tbtrtd tdwidthleft">Transaction Date</td><td class="labelsvalue tbtrtd tdwidthright">{{ $txDate }}</td></tr>
                 </table>
             </div>
             <div class="section">
