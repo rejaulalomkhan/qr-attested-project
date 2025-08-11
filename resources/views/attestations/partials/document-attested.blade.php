@@ -23,11 +23,25 @@
     .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; }
     .attested-preview-qrtext small { font-weight: 600; }
     @media (max-width: 768px) {
-        .attested-preview-footer-inner { flex-direction: column-reverse; align-items: stretch; }
-        .attested-preview-footer-right { justify-content: stretch; }
+        /* Force desktop layout on mobile */
+        .attested-preview-footer-inner { flex-direction: row !important; align-items: flex-end !important; }
+        .attested-preview-footer-right { justify-content: flex-end !important; }
     }
     /* Make info table responsive */
     .attested-preview-footer-right table { max-width: 100%; width: 420px; }
+
+    /* Scale whole desktop canvas down on small screens to keep identical layout */
+    .attested-desktop-scale { width: 1347px; transform-origin: top left; }
+    @media (max-width: 1347px) { .attested-desktop-scale { zoom: 0.95; transform: scale(0.95); } }
+    @media (max-width: 1200px) { .attested-desktop-scale { zoom: 0.90; transform: scale(0.90); } }
+    @media (max-width: 1024px) { .attested-desktop-scale { zoom: 0.80; transform: scale(0.80); } }
+    @media (max-width: 900px)  { .attested-desktop-scale { zoom: 0.75; transform: scale(0.75); } }
+    @media (max-width: 768px)  { .attested-desktop-scale { zoom: 0.65; transform: scale(0.65); } }
+    @media (max-width: 640px)  { .attested-desktop-scale { zoom: 0.58; transform: scale(0.58); } }
+    @media (max-width: 520px)  { .attested-desktop-scale { zoom: 0.52; transform: scale(0.52); } }
+    @media (max-width: 480px)  { .attested-desktop-scale { zoom: 0.73; transform: scale(0.48); } }
+    @media (max-width: 420px)  { .attested-desktop-scale { zoom: 0.64; transform: scale(0.44); } }
+    @media (max-width: 380px)  { .attested-desktop-scale { zoom: 0.60; transform: scale(0.40); } }
 </style>
 
 <div>

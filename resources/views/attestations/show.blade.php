@@ -14,7 +14,9 @@
         /* Loading state: keep page visible behind spinner */
         .doc-modal--loading .doc-modal__backdrop { display: none; }
         .doc-modal--loading .doc-modal__content { background: transparent; }
-        .doc-modal__close { position: fixed; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; border: none; font-size: 14px; padding: 8px 12px; border-radius: 16px; cursor: pointer; z-index: 3; }
+        .doc-modal__close { background: rgba(0,0,0,0.7); color: #fff; border: none; font-size: 14px; padding: 8px 12px; border-radius: 16px; cursor: pointer; }
+        .doc-close-layer { position: sticky; top: 8px; z-index: 5; height: 0; pointer-events: none; }
+        .doc-close-layer .doc-modal__close { position: absolute; right: 12px; pointer-events: auto; }
         .doc-modal__body { position: relative; flex: 1; overflow: hidden; background: transparent; display: flex; justify-content: center; align-items: center; padding: 0; }
         .doc-modal__content-inner { min-height: 100%; display: none; }
         .doc-modal__loader { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 600 16px/1 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; color: #333; background: rgba(0, 0, 0, 0.25); }
@@ -116,13 +118,17 @@
     <div id="documentModal" class="doc-modal" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="doc-modal__backdrop" data-doc-modal-close></div>
         <div class="doc-modal__content">
-            <button type="button" class="doc-modal__close" style="cursor: pointer; background-color: #49AFCD; color: #fff; padding: 10px; font-size: 16px; border: none; border-radius: 5px;" title="Close" aria-label="Close" data-doc-modal-close>
-                Close/ <span style="font-size: 18px; font-weight: bold;">اغلاق</span>
-            </button>
             <div class="doc-modal__body">
                 <div class="doc-modal__loader" id="docLoader"><div class="spinner" role="status" aria-label="Loading"></div></div>
                 <div class="doc-modal__error" id="docError"></div>
-                <div class="doc-modal__page"><div id="docContent" class="doc-modal__content-inner"></div></div>
+                <div class="doc-modal__page">
+                    <div class="doc-close-layer">
+                        <button type="button" class="doc-modal__close" style="cursor: pointer; background-color: #49AFCD; color: #fff; padding: 10px; font-size: 16px; border: none; border-radius: 5px;" title="Close" aria-label="Close" data-doc-modal-close>
+                            Close/ <span style="font-size: 18px; font-weight: bold;">اغلاق</span>
+                        </button>
+                    </div>
+                    <div id="docContent" class="doc-modal__content-inner attested-desktop-scale"></div>
+                </div>
             </div>
         </div>
     </div>
