@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\Controllers;
-use App\Helpers\PdfTemplateHelper;
 use Illuminate\Http\Request;
 use App\Models\Attestation;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
@@ -187,41 +185,69 @@ class AttestationController extends Controller
         return response()->json(['html' => $html]);
     }
 
-    // Generate attested PDF (original embedded in blank PDF with user info at bottom)
-    public function generateFinalPdf($id)
+    // Public: Return JSON with rendered HTML of original documents by hash
+    public function apiOriginalHtmlByHash($hash)
+    {
+        $attestation = Attestation::where('hash', $hash)->firstOrFail();
+        $attachments = json_decode($attestation->original_document_path, true);
+        if (!is_array($attachments) || empty($attachments)) {
+            $attachments = $attestation->original_document_path ? [$attestation->original_document_path] : [];
+        }
+        $html = view('attestations.partials.document-original', [
+            'attachments' => $attachments,
+            'attestation' => $attestation,
+        ])->render();
+        return response()->json(['html' => $html]);
+    }
+
+    // Public: Return JSON with rendered HTML of attested content by hash
+    public function apiAttestedHtmlByHash($hash)
+    {
+        $attestation = Attestation::where('hash', $hash)->firstOrFail();
+        $attachments = json_decode($attestation->original_document_path, true);
+        if (!is_array($attachments) || empty($attachments)) {
+            $attachments = $attestation->original_document_path ? [$attestation->original_document_path] : [];
+        }
+        $html = view('attestations.partials.document-attested', [
+            'attachments' => $attachments,
+            'attestation' => $attestation,
+        ])->render();
+        return response()->json(['html' => $html]);
+    }
+
+    
+
+    // Print-friendly view that mirrors modal layout and triggers browser print
+    public function print($id)
     {
         $attestation = Attestation::findOrFail($id);
-        $originals = json_decode($attestation->original_document_path, true);
-        if (!$originals) {
-            $originals = [$attestation->original_document_path];
+        $attachments = json_decode($attestation->original_document_path, true);
+        if (!is_array($attachments) || empty($attachments)) {
+            $attachments = $attestation->original_document_path ? [$attestation->original_document_path] : [];
         }
-        // Generate QR code image
-        $qrUrl = route('attestations.verify', $attestation->hash);
-        $qrImage = QrCode::format('png')->size(120)->generate($qrUrl);
-        $qrPath = storage_path('app/public/qrcodes/' . $attestation->id . '.png');
-        Storage::disk('public')->put('qrcodes/' . $attestation->id . '.png', $qrImage);
+        $qrPngBase64 = base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(route('attestations.verify', $attestation->hash)));
+        return view('attestations.print', compact('attestation', 'attachments', 'qrPngBase64'));
+    }
 
-    $template = storage_path('app/public/template/Embade-original-Document.pdf');
-        $infoBox = [
-            'verify_no' => $attestation->id,
-            'verifier' => $attestation->verifier_name,
-            'name' => $attestation->applicant_name,
-            'document' => $attestation->document_type,
-            'date' => $attestation->verification_datetime,
-            'approver' => $attestation->verifier_name,
-            'email' => $attestation->email,
-            'phone' => $attestation->phone,
-        ];
-        $output = \App\Helpers\PdfTemplateHelper::generateWithTemplate(
-            array_map(function($f) { return storage_path('app/public/' . $f); }, $originals),
-            $template,
-            $qrPath,
-            $infoBox
-        );
-        return response()->file($output, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="attested_document.pdf"'
-        ]);
+    public function printAttested($id)
+    {
+        $attestation = Attestation::findOrFail($id);
+        $attachments = json_decode($attestation->original_document_path, true);
+        if (!is_array($attachments) || empty($attachments)) {
+            $attachments = $attestation->original_document_path ? [$attestation->original_document_path] : [];
+        }
+        $qrPngBase64 = base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(route('attestations.verify', $attestation->hash)));
+        return view('attestations.print-attested', compact('attestation', 'attachments', 'qrPngBase64'));
+    }
+
+    public function printOriginal($id)
+    {
+        $attestation = Attestation::findOrFail($id);
+        $attachments = json_decode($attestation->original_document_path, true);
+        if (!is_array($attachments) || empty($attachments)) {
+            $attachments = $attestation->original_document_path ? [$attestation->original_document_path] : [];
+        }
+        return view('attestations.print-original', compact('attestation', 'attachments'));
     }
 
     public function destroy($id)

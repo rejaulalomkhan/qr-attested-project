@@ -58,11 +58,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </a>
-                                {{-- <a href="{{ route('attestations.pdf', $att->id) }}" target="_blank">PDF</a> --}}
-                                <!-- Temporary Download Icon -->
-                                <a href="{{ route('attestations.pdf', $att->id) }}" title="Download Attested PDF" style="margin:0 4px;vertical-align:middle;" target="_blank">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"/></svg>
-                                </a>
+                                
                                 <a href="{{ route('attestations.edit', $att->id) }}" title="Edit" aria-label="Edit" style="margin:0 4px;vertical-align:middle;color:#e67e22;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M16.5 3.75a2.121 2.121 0 113 3L7.5 18.75 3 19.5l.75-4.5L16.5 3.75z"/></svg>
                                 </a>

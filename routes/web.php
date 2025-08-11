@@ -19,8 +19,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/attestations/create', [AttestationController::class, 'create'])->name('attestations.create');
     Route::post('/attestations', [AttestationController::class, 'store'])->name('attestations.store');
     Route::get('/attestations/{id}', [AttestationController::class, 'show'])->name('attestations.show');
-    // Keep PDF route for backward compatibility (not used by modal flow)
-    Route::get('/attestations/{id}/pdf', [AttestationController::class, 'generateFinalPdf'])->name('attestations.pdf');
     // API-like HTML responses (no PDFs) for modal consumption
     Route::get('/attestations/{id}/content/original', [AttestationController::class, 'apiOriginalHtml'])->name('attestations.content.original');
     Route::get('/attestations/{id}/content/attested', [AttestationController::class, 'apiAttestedHtml'])->name('attestations.content.attested');
@@ -30,6 +28,14 @@ Route::middleware(['auth'])->group(function () {
 
 // Public verify route for QR code scan, using a hash for security
 Route::get('/verify/{hash}', [AttestationController::class, 'verify'])->name('attestations.verify');
+// Public endpoints to fetch rendered HTML content for modal consumption (by hash)
+Route::get('/verify/{hash}/content/original', [AttestationController::class, 'apiOriginalHtmlByHash'])->name('attestations.verify.content.original');
+Route::get('/verify/{hash}/content/attested', [AttestationController::class, 'apiAttestedHtmlByHash'])->name('attestations.verify.content.attested');
+
+// QR bridge route to support URLs like /User/#/page/preview/{token}
+Route::get('/User/', function () {
+    return view('attestations.qr-bridge');
+})->name('attestations.qrbridge');
 
 // Ensure auth routes are loaded
 require __DIR__.'/auth.php';

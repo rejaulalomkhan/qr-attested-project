@@ -62,13 +62,13 @@
                 <tr>
                     <td class="tbtrtd tdwidthleft">Attested Document</td>
                     <td class="labelsvalue tbtrtd tdwidthright">
-                        <a href="{{ route('attestations.pdf', $attestation->id) }}" class="view-document" target="_blank">View Attested Document</a>
+                        
                     </td>
                 </tr>
                 <tr style="border-top: 2px solid black;">
                     <td class="tbtrtd tdwidthleft">Attested Document</td>
                     <td class="labelsvalue tbtrtd tdwidthright">
-                        <a href="{{ route('attestations.pdf', $attestation->id) }}" class="view-document" target="_blank">View Document</a>
+                        
                     </td>
                 </tr>
             </table>

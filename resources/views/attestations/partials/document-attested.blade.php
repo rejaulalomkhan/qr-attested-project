@@ -83,7 +83,11 @@
                                     (QR Code)
                                 </span>
                             </div>
-                            <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate(route('attestations.verify', $attestation->hash))) }}" alt="QR Code" /> 
+                            @php
+                                $token = urlencode(base64_encode($attestation->hash));
+                                $qrUrl = url('/User/#/page/preview/'.$token);
+                            @endphp
+                            <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate($qrUrl)) }}" alt="QR Code" /> 
                         </div>
                     </div>
                 </div>

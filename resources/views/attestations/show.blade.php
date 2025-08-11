@@ -141,8 +141,8 @@
             let previousHtmlOverflow = '';
             let previousBodyOverflow = '';
 
-            function openModalWithApi(id, type) {
-                if (!id || !type) return;
+            function openModalWithApi(idOrHash, type) {
+                if (!idOrHash || !type) return;
                 // Prepare UI
                 errorBox.style.display = 'none';
                 errorBox.textContent = '';
@@ -158,7 +158,10 @@
                 document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
 
-                const url = `/attestations/${encodeURIComponent(id)}/content/${encodeURIComponent(type)}`;
+                const isVerifyPage = window.location.pathname.startsWith('/verify/');
+                const url = isVerifyPage
+                  ? `${window.location.pathname}/content/${encodeURIComponent(type)}`
+                  : `/attestations/${encodeURIComponent(idOrHash)}/content/${encodeURIComponent(type)}`;
                 fetch(url, { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
                   .then(function(response) {
                       if (!response.ok) throw new Error('HTTP ' + response.status + ' ' + response.statusText);

@@ -71,7 +71,7 @@ Route::get('/attestations/create', [AttestationController::class, 'create'])->na
 Route::post('/attestations', [AttestationController::class, 'store'])->name('attestations.store');
 Route::get('/attestations/{id}', [AttestationController::class, 'show'])->name('attestations.show');
 Route::get('/verify/{id}', [AttestationController::class, 'verify'])->name('attestations.verify');
-Route::get('/attestations/{id}/pdf', [AttestationController::class, 'generateFinalPdf'])->name('attestations.pdf');
+// PDF generation has been removed
 ```
 
 ---
@@ -144,14 +144,12 @@ public function verify($id)
 
 ## 9. PDF Generation
 ```php
-use Barryvdh\DomPDF\Facade\Pdf;
+// PDF generation removed
 
 public function generateFinalPdf($id)
 {
     $attestation = Attestation::findOrFail($id);
-    $pdf = Pdf::loadView('attestations.pdf', compact('attestation'))
-        ->setPaper('A4', 'portrait');
-    return $pdf->download("attestation_{$id}.pdf");
+    // removed
 }
 ```
 
