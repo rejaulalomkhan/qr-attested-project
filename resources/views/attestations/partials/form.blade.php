@@ -50,17 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="transaction_date_display">Transaction Date:</label>
-                    @php
-                        $transactionDateRaw = old('transaction_date', $attestation->transaction_date ?? '');
-                        try {
-                            $transactionDateDisplay = $transactionDateRaw ? \Carbon\Carbon::parse($transactionDateRaw)->format('d M Y') : '';
-                        } catch (\Exception $e) {
-                            $transactionDateDisplay = $transactionDateRaw;
-                        }
-                    @endphp
-                    <input type="text" id="transaction_date_display" value="{{ $transactionDateDisplay }}" placeholder="19 Mar 2025" required autocomplete="off">
-                    <input type="hidden" id="transaction_date" name="transaction_date" value="{{ $transactionDateRaw }}">
-                    <small>Format: e.g. 19 Mar 2025</small>
+                    <input type="date" id="transaction_date" name="transaction_date" value="{{ old('transaction_date', $attestation->transaction_date ?? '') }}" required>
                 </div>
             </div>
             <div class="section" style="background: #f8fafc; border-radius: 10px; padding: 24px 24px 16px 24px; margin-bottom: 32px;">
@@ -72,7 +62,8 @@
                      name="document_type" value="{{ old('document_type', $attestation->document_type ?? '') }}" required>
                     <datalist id="document-type-list">
                         <option value="Other commercial Documents">
-                        <option value="Civil Document- ID Card Driving license birth certificate passport">
+                        <option value="Civil Document- ID Card Driving license birth certificate passport">
+                        <option value="Marriage certificate">
                     </datalist>
                 </div>
                 <div class="form-group">
