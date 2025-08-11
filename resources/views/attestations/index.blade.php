@@ -47,23 +47,46 @@
                     @foreach($attestations as $att)
                         <tr>
                             <td>{{ $att->id }}</td>
-                            <td>{{ $att->transaction_number }}</td>
+                            <td> <a href="{{ route('attestations.show', $att->id) }}" target="_blank"> {{ $att->transaction_number }}</a></td>
                             <td>{{ $att->applicant_name }}</td>
-                            <td>{{ $att->document_type }}</td>
-                            <td>{{ $att->verification_status }}</td>
-                            <td>{{ \Carbon\Carbon::parse($att->verification_datetime)->format('Y-m-d H:i:s') }}</td>
+                            <td style="font-size: 11px;">{{ $att->document_type }}</td>
                             <td>
-                                <a href="{{ route('attestations.show', $att->id) }}" target="_blank">View</a>
-                                <a href="{{ route('attestations.pdf', $att->id) }}" target="_blank">PDF</a>
+                                @php
+                                    $statusValue = trim($att->verification_status ?? '');
+                                    $statusKey = strtolower(str_replace(' ', '-', $statusValue));
+                                    $allowedStatuses = ['pending','approved','rejected','under-review'];
+                                    $badgeKey = in_array($statusKey, $allowedStatuses) ? $statusKey : 'pending';
+                                @endphp
+                                <span class="badge badge-{{ $badgeKey }}">{{ $statusValue }}</span>
+                            </td>
+                            <td style="font-size: 11px;">{{ optional($att->created_at)->format('Y-m-d') }}</td>
+                            <td style="display: flex; align-items: center; justify-content: center;">
+                                <a href="{{ route('attestations.show', $att->id) }}" target="_blank" title="View" aria-label="View" style="margin:0 4px;vertical-align:middle;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </a>
+                                {{-- <a href="{{ route('attestations.pdf', $att->id) }}" target="_blank">PDF</a> --}}
                                 <!-- Temporary Download Icon -->
                                 <a href="{{ route('attestations.pdf', $att->id) }}" title="Download Attested PDF" style="margin:0 4px;vertical-align:middle;" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"/></svg>
                                 </a>
-                                <a href="{{ route('attestations.edit', $att->id) }}" style="color:#e67e22;" title="Edit">Edit</a>
-                                <a href="#" style="color:#e74c3c;" title="Delete (not implemented)" onclick="return confirm('Are you sure you want to delete this attestation?')">Delete</a>
+                                <a href="{{ route('attestations.edit', $att->id) }}" title="Edit" aria-label="Edit" style="margin:0 4px;vertical-align:middle;color:#e67e22;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M16.5 3.75a2.121 2.121 0 113 3L7.5 18.75 3 19.5l.75-4.5L16.5 3.75z"/></svg>
+                                </a>
+                                <a href="#" title="Delete (not implemented)" aria-label="Delete" onclick="return confirm('Are you sure you want to delete this attestation?')" style="margin:0 4px;vertical-align:middle;color:#e74c3c;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862A2 2 0 015.867 19.142L5 7m5 4v6m4-6v6M9 7h6m-7 0V5a2 2 0 012-2h2a2 2 0 012 2v2"/></svg>
+                                </a>
                             </td>
 </style>
 <style>
+/* Status badge styles */
+.badge { display:inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.2px; }
+.badge-pending { background: #FEF3C7; color: #92400E; }
+.badge-approved { background: #D1FAE5; color: #065F46; }
+.badge-rejected { background: #FEE2E2; color: #991B1B; }
+.badge-under-review { background: #DBEAFE; color: #1E40AF; }
 .btn-new-attestation {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
