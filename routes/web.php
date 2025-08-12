@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     // API-like HTML responses (no PDFs) for modal consumption
     Route::get('/attestations/{id}/content/original', [AttestationController::class, 'apiOriginalHtml'])->name('attestations.content.original');
     Route::get('/attestations/{id}/content/attested', [AttestationController::class, 'apiAttestedHtml'])->name('attestations.content.attested');
+    // Attested preview/print (A4) view with download button
+    Route::get('/attestations/{id}/attested/preview', [AttestationController::class, 'printAttested'])->name('attestations.print-attested');
     Route::delete('/attestations/{id}', [AttestationController::class, 'destroy'])->name('attestations.destroy');
 });
 

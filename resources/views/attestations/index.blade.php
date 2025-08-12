@@ -58,6 +58,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </a>
+                                <a href="{{ route('attestations.print-attested', $att->id) }}" target="_blank" title="Download Attested as PDF" aria-label="Download Attested as PDF" style="margin:0 4px;vertical-align:middle;color:#10b981;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-3.5-3.5M12 16l3.5-3.5M5 20h14" />
+                                    </svg>
+                                </a>
                                 
                                 <a href="{{ route('attestations.edit', $att->id) }}" title="Edit" aria-label="Edit" style="margin:0 4px;vertical-align:middle;color:#e67e22;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:inline;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M16.5 3.75a2.121 2.121 0 113 3L7.5 18.75 3 19.5l.75-4.5L16.5 3.75z"/></svg>
