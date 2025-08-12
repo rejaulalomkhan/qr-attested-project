@@ -19,8 +19,8 @@
     .attested-preview-footer-left { flex: 0 1 auto; display:flex; align-items:center; gap:12px; color:#6c757d; font-weight:600; }
     .attested-preview-qr { width: 117px; height: 117px; }         
     .attested-preview-footer-right { flex: 1 1 auto; display:flex; flex-direction: column; align-items:flex-end; gap: 17px; margin-right: 10px;}
-    .attested-preview-qrrow { display:flex; align-items:flex-end; justify-content:flex-end; gap: 16px; }
-    .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; }
+    .attested-preview-qrrow { display:flex; align-items:center; justify-content:flex-end; gap: 16px; }
+    .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; font-family: serif; font-size: 19.2184px; margin-top: 14px;}
     .attested-preview-qrtext small { font-weight: 600; }
     @media (max-width: 768px) {
         /* Force desktop layout on mobile */
