@@ -24,13 +24,13 @@
         @keyframes doc-spin { to { transform: rotate(360deg); } }
         .doc-modal__error { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: #fff; color: #b00020; padding: 24px; text-align: center; }
         .doc-modal__error a { color: #2962ff; text-decoration: underline; }
-        .doc-modal__page { width: 1347px; max-width: 100vw; height: 100vh; overflow: auto; background: #ffffff; border-radius: 0; box-shadow: none; padding: 0; }
+        .doc-modal__page { width: 1362px; max-width: 100vw; height: 100vh; overflow: auto; background: #ffffff; border-radius: 0; box-shadow: none; padding: 0; }
         @media (max-width: 820px) {
             .doc-modal__page { height: 100vh; border-radius: 0; max-width: 100vw; }
         }
     </style>
 </head>
-<body>
+<body data-verify="{{ request()->is('verify/*') ? '1' : '0' }}" data-hash="{{ $attestation->hash }}">
     <div class="main-container">
         <div class="vertical-text">Powered by VFS Global</div>
         <div class="document-container">
@@ -158,9 +158,10 @@
                 document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
 
-                const isVerifyPage = window.location.pathname.startsWith('/verify/');
+                const isVerifyPage = document.body.getAttribute('data-verify') === '1';
+                const verifyHash = document.body.getAttribute('data-hash');
                 const url = isVerifyPage
-                  ? `${window.location.pathname}/content/${encodeURIComponent(type)}`
+                  ? `/verify/${encodeURIComponent(verifyHash)}/content/${encodeURIComponent(type)}`
                   : `/attestations/${encodeURIComponent(idOrHash)}/content/${encodeURIComponent(type)}`;
                 fetch(url, { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
                   .then(function(response) {
@@ -216,6 +217,19 @@
                     openModalWithApi(id, type);
                 });
             });
+        })();
+    </script>
+    <script>
+        (function() {
+            // If we are on the public verify page, rewrite the URL back to the QR-style without reloading
+            if (document.body.getAttribute('data-verify') === '1') {
+                var tokenB64 = @json(base64_encode($attestation->hash));
+                var desiredUrl = '/User/#/page/preview/' + encodeURIComponent(tokenB64);
+                var alreadyDesired = (window.location.pathname === '/User/' && window.location.hash.indexOf(tokenB64) !== -1);
+                if (!alreadyDesired) {
+                    history.replaceState(null, '', desiredUrl);
+                }
+            }
         })();
     </script>
 </body>
