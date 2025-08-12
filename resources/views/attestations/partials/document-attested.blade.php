@@ -87,7 +87,7 @@
                                 $token = urlencode(base64_encode($attestation->hash));
                                 $qrUrl = url('/User/#/page/preview/'.$token);
                             @endphp
-                            <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate($qrUrl)) }}" alt="QR Code" /> 
+                            <img class="attested-preview-qr" style="padding: 10px; background-color: #ffffffa8; border-radius: 5px; opacity: 90%;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(90)->margin(0)->generate($qrUrl)) }}" alt="QR Code" /> 
                         </div>
                     </div>
                 </div>
