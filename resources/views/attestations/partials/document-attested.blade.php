@@ -17,7 +17,7 @@
     .attested-preview-footer-bg { position: absolute; left: 0; right: 0; top: 0; height: 400px; background-repeat: no-repeat; background-position: bottom center; background-size: 100% 405px; pointer-events: none; }
     .attested-preview-footer-inner { position: relative; height: 100%; display:flex; flex-direction: row; align-items:flex-end; justify-content: space-between; gap: 24px; }
     .attested-preview-footer-left { flex: 0 1 auto; display:flex; align-items:center; gap:12px; color:#6c757d; font-weight:600; }
-    .attested-preview-qr { width: 100px; height: 100px; }         
+    .attested-preview-qr { width: 117px; height: 117px; }         
     .attested-preview-footer-right { flex: 1 1 auto; display:flex; flex-direction: column; align-items:flex-end; gap: 17px; margin-right: 10px;}
     .attested-preview-qrrow { display:flex; align-items:flex-end; justify-content:flex-end; gap: 16px; }
     .attested-preview-qrtext { direction: rtl; text-align: right; font-weight: 700; line-height: 1.6; }

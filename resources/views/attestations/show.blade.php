@@ -117,16 +117,17 @@
     </div>
     <div id="documentModal" class="doc-modal" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="doc-modal__backdrop" data-doc-modal-close></div>
+        <div class="doc-close-layer">
+            <button type="button" class="doc-modal__close" style="cursor: pointer; background-color: #49AFCD; color: #fff; padding: 10px; font-size: 16px; border: none; border-radius: 5px;" title="Close" aria-label="Close" data-doc-modal-close>
+                Close/ <span style="font-size: 18px; font-weight: bold;">اغلاق</span>
+            </button>
+        </div>
         <div class="doc-modal__content">
             <div class="doc-modal__body">
                 <div class="doc-modal__loader" id="docLoader"><div class="spinner" role="status" aria-label="Loading"></div></div>
                 <div class="doc-modal__error" id="docError"></div>
                 <div class="doc-modal__page">
-                    <div class="doc-close-layer">
-                        <button type="button" class="doc-modal__close" style="cursor: pointer; background-color: #49AFCD; color: #fff; padding: 10px; font-size: 16px; border: none; border-radius: 5px;" title="Close" aria-label="Close" data-doc-modal-close>
-                            Close/ <span style="font-size: 18px; font-weight: bold;">اغلاق</span>
-                        </button>
-                    </div>
+                    
                     <div id="docContent" class="doc-modal__content-inner attested-desktop-scale"></div>
                 </div>
             </div>
